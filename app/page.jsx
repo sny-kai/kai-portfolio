@@ -390,7 +390,7 @@ export default function Portfolio() {
       }>
         <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px" }}>
           <Bullet color={ACCENT.fusion}>Coordinated mentorship pairings for 50+ students by academic and career interest.</Bullet>
-          <Bullet color={ACCENT.fusion}>Organized retreat, managed multi-group communications, and large-scale events for 80+ attendees.</Bullet>
+          <Bullet color={ACCENT.fusion}>Organized retreat programming, managed multi-group communications, and large-scale events for 80+ attendees.</Bullet>
           <Bullet color={ACCENT.fusion}>Planned joint meetings across student orgs to build campus-wide collaboration.</Bullet>
         </ul>
         <div><Tag color={ACCENT.fusion}>Event Ops</Tag><Tag color={ACCENT.fusion}>Cross-club Collaboration</Tag><Tag color={ACCENT.fusion}>Mentorship Program</Tag></div>
