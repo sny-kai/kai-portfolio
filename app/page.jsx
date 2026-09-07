@@ -42,15 +42,7 @@ function useReveal() {
 }
 
 /* ---------- Section wrapper ---------- */
-function Chapter({ index, id, eyebrow, title, meta, children, media }: {
-  index: number;
-  id: string;
-  eyebrow: string;
-  title: string;
-  meta: string;
-  children: React.ReactNode;
-  media?: React.ReactNode;
-}) {
+function Chapter({ index, id, eyebrow, title, meta, children, media }) {
   const [ref, visible] = useReveal();
   return (
     <section
@@ -97,7 +89,7 @@ function LinkedInIcon({ size = 16 }) {
   );
 }
 
-function Tag({ children }: { children: React.ReactNode }) {
+function Tag({ children }) {
   return (
     <span style={{ display: "inline-block", fontFamily: "'Space Grotesk', sans-serif", fontSize: 12, color: AMBER, border: `1px solid rgba(232,163,61,0.4)`, borderRadius: 3, padding: "3px 9px", marginRight: 8, marginBottom: 8 }}>
       {children}
