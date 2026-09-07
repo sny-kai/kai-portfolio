@@ -48,6 +48,7 @@ function Chapter({ index, id, eyebrow, title, meta, children, media }) {
     <section
       id={id}
       ref={ref}
+      className="page-section"
       style={{ minHeight: "100vh", scrollSnapAlign: "start", display: "flex", alignItems: "center", padding: "6rem 6vw", boxSizing: "border-box" }}
     >
       <div
@@ -143,6 +144,7 @@ function RecipeCardFrame({ src, alt, label, footer, rotate = -1.2 }) {
     </div>
   );
 }
+
 /* ---------- RISC-V: PCB / circuit backdrop ---------- */
 function DatapathPanel() {
   return (
@@ -162,7 +164,6 @@ function DatapathPanel() {
 function TestbenchPanel() {
   return (
     <div style={{ position: "relative", border: `1px solid ${LINE}`, borderRadius: 2, padding: 12, background: "#050D16", overflow: "hidden" }}>
-      {/* scanline texture */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(232,163,61,0.04) 0 1px, transparent 1px 3px)", pointerEvents: "none" }} />
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
         <div style={{ width: 6, height: 6, borderRadius: "50%", background: AMBER }} />
@@ -178,7 +179,6 @@ function TestbenchPanel() {
     </div>
   );
 }
-
 
 function ChipFrame() {
   const pinsPerSide = 8;
@@ -214,22 +214,16 @@ function ChipFrame() {
         <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: MUTED, margin: "0 0 12px", letterSpacing: "0.05em" }}>
           RISCV-32 &middot; SINGLE CYCLE
         </p>
-
-        {/* ▼▼▼ THIS is the only part that changed — everything above stays the same ▼▼▼ */}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           <DatapathPanel />
           <TestbenchPanel />
         </div>
-        {/* ▲▲▲ this replaced the old two-column <img><img> grid ▲▲▲ */}
-
       </div>
     </div>
   );
 }
 
-
-/* ---------- PARTIFUL: scrapbook polaroid ---------- */
-
+/* ---------- FUSION: winter + mentorship frames ---------- */
 function WinterFrame() {
   const Snowflake = ({ style }) => (
     <svg width="16" height="16" viewBox="0 0 16 16" style={{ position: "absolute", ...style }}>
@@ -279,15 +273,11 @@ function MentorshipFrame() {
   );
 }
 
-
-
 /* ---------- PARTIFUL: scrapbook polaroid ---------- */
-
 function ScrapbookFrame() {
   return (
     <div style={{ display: "flex", justifyContent: "center", paddingTop: 10 }}>
       <div style={{ position: "relative", transform: "rotate(2.5deg)" }}>
-        {/* washi tape */}
         <div
           style={{
             position: "absolute", top: -14, left: "50%", transform: "translateX(-50%) rotate(-4deg)",
@@ -305,13 +295,10 @@ function ScrapbookFrame() {
           <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: "italic", fontSize: 13, color: "#5B5346", textAlign: "center", marginTop: 12, marginBottom: 14 }}>
             partiful.com &middot; sponsored event
           </p>
-
-          {/* referral strip — a torn-ticket style tab */}
           <div style={{ borderTop: `1px dashed ${LINE}`, paddingTop: 12, textAlign: "center" }}>
             <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: "#8B7F6A", margin: "0 0 6px", letterSpacing: "0.03em" }}>
               hosting something? (yes, this is me growing my own numbers &mdash; on brand, i know)
             </p>
-            
             <a
               href="https://m.partiful.com/5bSFYKZhX5b"
               target="_blank"
@@ -359,6 +346,10 @@ export default function Portfolio() {
           .chapter-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .rail { display: none !important; }
         }
+        @media (min-width: 861px) and (max-width: 1180px) {
+          .rail .rail-label { display: none; }
+          .page-section { padding-left: 100px !important; }
+        }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
       `}</style>
 
@@ -366,7 +357,7 @@ export default function Portfolio() {
         {SECTIONS.map((s) => (
           <button key={s.id} onClick={() => scrollTo(s.id)} aria-label={s.label} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 10, padding: 0 }}>
             <span style={{ width: active === s.id ? 9 : 6, height: active === s.id ? 9 : 6, borderRadius: "50%", background: active === s.id ? AMBER : "transparent", border: `1px solid ${active === s.id ? AMBER : LINE}`, transition: "all 0.25s ease" }} />
-            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: active === s.id ? AMBER : MUTED, opacity: active === s.id ? 1 : 0, transition: "opacity 0.25s ease", whiteSpace: "nowrap" }}>
+            <span className="rail-label" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: active === s.id ? AMBER : MUTED, opacity: active === s.id ? 1 : 0, transition: "opacity 0.25s ease", whiteSpace: "nowrap" }}>
               {s.label}
             </span>
           </button>
@@ -374,10 +365,10 @@ export default function Portfolio() {
       </nav>
 
       {/* HERO */}
-      <section id="hero" style={{ minHeight: "100vh", scrollSnapAlign: "start", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6vw" }}>
+      <section id="hero" className="page-section" style={{ minHeight: "100vh", scrollSnapAlign: "start", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6vw" }}>
         <div style={{ maxWidth: 780 }}>
           <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, color: MUTED, marginBottom: 18 }}>Kai Snyder &middot; Computer Engineering &middot; Innovation and Entrepreneurship &middot; UC Irvine</p>
-          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, fontSize: "clamp(38px, 6vw, 68px)", lineHeight: 1.08, margin: "0 0 24px" }}> 
+          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, fontSize: "clamp(38px, 6vw, 68px)", lineHeight: 1.08, margin: "0 0 24px" }}>
             Build the system. <br /> Break down the pitch.
           </h1>
           <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 18, lineHeight: 1.7, color: "#D8DEE6", maxWidth: 560, marginBottom: 40 }}>
@@ -390,26 +381,26 @@ export default function Portfolio() {
       </section>
 
       <Chapter index={1} id="kainna" eyebrow="Project" title="Kain Na!" meta="Software product developer &middot; Next.js, Tailwind CSS" media={
-  <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-    <RecipeCardFrame
-      src="/kainna-demo.jpg"
-      alt="Kain Na! app demo screenshot"
-      label="recipe / kain-na.jsx"
-      footer="serves: everyone · stack: next.js, tailwind"
-      rotate={-1.2}
-    />
-    <RecipeCardFrame
-      src="/kainna-award.jpg"
-      alt="Kain Na! award recognition screenshot"
-      label="recipe / award.jsx"
-      footer="responsive design · tailwind breakpoints"
-      rotate={1.5}
-    />
-  </div>
-}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <RecipeCardFrame
+            src="/kainna-demo.jpg"
+            alt="Kain Na! app demo screenshot"
+            label="recipe / kain-na.jsx"
+            footer="serves: everyone &middot; stack: next.js, tailwind"
+            rotate={-1.2}
+          />
+          <RecipeCardFrame
+            src="/kainna-award.jpg"
+            alt="Kain Na! award recognition screenshot"
+            label="recipe / award.jsx"
+            footer="responsive design &middot; tailwind breakpoints"
+            rotate={1.5}
+          />
+        </div>
+      }>
         <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px" }}>
           <Bullet>Built frontend software for a Filipino culinary platform &mdash; functional components, dynamic recipe cards, mobile-first Tailwind design.</Bullet>
-          <Bullet>Learned Next.Js, Tailwind CSS, and Git in a Scrum cycle: peer code review, Git branching, sprint check-ins.</Bullet>
+          <Bullet>Learned Next.js, Tailwind CSS, and Git in a Scrum cycle: peer code review, Git branching, sprint check-ins.</Bullet>
           <Bullet>Pitched story, value proposition, and technical goals to industry sponsors at FUSIONcon.</Bullet>
           <Bullet>Won "Best Pitch and Storytelling" out of 5 competing teams.</Bullet>
         </ul>
@@ -426,11 +417,11 @@ export default function Portfolio() {
       </Chapter>
 
       <Chapter index={3} id="fusion" eyebrow="Experience" title="FUSION &mdash; Internal Vice President Intern" meta="Nov 2025 &ndash; Mar 2026" media={
-  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-    <WinterFrame />
-    <MentorshipFrame />
-  </div>
-}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <WinterFrame />
+          <MentorshipFrame />
+        </div>
+      }>
         <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px" }}>
           <Bullet>Coordinated mentorship pairings for 50+ students by academic and career interest.</Bullet>
           <Bullet>Planned retreat activities, managed multi-group communications, and large-scale events for 80+ attendees.</Bullet>
@@ -477,7 +468,7 @@ export default function Portfolio() {
         <div><Tag>Java</Tag><Tag>Process Automation</Tag></div>
       </Chapter>
 
-      <section id="close" style={{ minHeight: "100vh", scrollSnapAlign: "start", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6vw" }}>
+      <section id="close" className="page-section" style={{ minHeight: "100vh", scrollSnapAlign: "start", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6vw" }}>
         <div style={{ maxWidth: 640 }}>
           <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, color: AMBER, marginBottom: 14 }}>Honors</p>
           <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 17, color: "#D8DEE6", lineHeight: 1.7, marginBottom: 40 }}>
